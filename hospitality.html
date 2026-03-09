@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hospitality — SCC</title>
+  <meta name="description" content="SCC translates what makes a venue worth showing up to into content systems that fill rooms. Brand diagnosis, content strategy, and digital rollout for hospitality and venues." />
+  <meta property="og:title" content="Hospitality — SCC" />
+  <meta property="og:description" content="We translate what makes a venue worth showing up to into content systems that fill rooms. Brand diagnosis, content strategy, and digital rollout." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://socialchicagocollective.com/hospitality" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hospitality — SCC" />
+  <meta name="twitter:description" content="Content systems that fill rooms. Brand diagnosis, content strategy, and digital rollout for venues." />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="canonical" href="https://socialchicagocollective.com/hospitality" />
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0a0a0a; --muted:rgba(10,10,10,.50);
+      --dim:rgba(10,10,10,.26); --hairline:rgba(10,10,10,.11);
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      --sans:Helvetica,Arial,ui-sans-serif,system-ui,-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;}
+    body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:-0.02em;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+    ::selection{background:var(--ink);color:var(--bg);}
+
+    .grain{display:none;}
+    @media(pointer:fine){
+      .grain{display:block;position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.20;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");background-size:140px 140px;animation:grainShift .1s steps(1) infinite;}
+    }
+    @keyframes grainShift{0%{background-position:0 0;}12%{background-position:-40px 18px;}24%{background-position:22px -34px;}36%{background-position:-14px 44px;}48%{background-position:48px -10px;}60%{background-position:-32px 26px;}72%{background-position:12px -48px;}84%{background-position:-54px 12px;}}
+
+    #cursor,#cursor-ring{display:none;}
+    @media(pointer:fine){
+      body{cursor:none;}
+      #cursor{display:block;position:fixed;top:0;left:0;z-index:10000;width:6px;height:6px;background:var(--ink);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .12s,height .12s;}
+      #cursor-ring{display:block;position:fixed;top:0;left:0;z-index:9999;width:28px;height:28px;border:1px solid rgba(10,10,10,.22);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .25s,width .15s,height .15s;opacity:0;}
+      body.cursor-on #cursor-ring{opacity:1;}
+      body.hovering #cursor{width:10px;height:10px;}
+      body.hovering #cursor-ring{width:36px;height:36px;border-color:rgba(10,10,10,.35);}
+    }
+
+    .topbar{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--ink);}
+    .topbar-inner{max-width:1080px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .brand{display:flex;align-items:baseline;gap:10px;}
+    .brand b{font-weight:900;letter-spacing:-.07em;font-size:15px;text-transform:uppercase;}
+    .brand span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+    .nav{display:flex;gap:4px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+    .nav a{padding:6px 10px;border-radius:2px;transition:background .12s;}
+    .nav a:hover{background:rgba(10,10,10,.06);}
+    .nav a.active{color:var(--ink);}
+    .btn{border:1.5px solid var(--ink);border-radius:2px;padding:7px 16px;font-size:12px;font-weight:800;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--ink);cursor:pointer;transition:background .14s,color .14s;font-family:inherit;}
+    @media(pointer:fine){.btn{cursor:none;}}
+    .btn:hover{background:var(--ink);color:#fff;}
+    .btn.primary{background:var(--ink);color:#fff;}
+    .btn.primary:hover{background:#2a2a2a;}
+    .btn.block{width:100%;border-radius:3px;padding:13px 16px;font-size:13px;}
+    .btn.ghost{border-color:rgba(10,10,10,.22);color:var(--muted);}
+    .btn.ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+    .page{max-width:1080px;margin:0 auto;padding:0 24px 120px;}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .rd1{transition-delay:.07s;}.rd2{transition-delay:.16s;}.rd3{transition-delay:.25s;}.rd4{transition-delay:.34s;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleX{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
+
+    /* Hero */
+    .hero{padding:80px 0 64px;}
+    .hero-dateline{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);padding-bottom:12px;border-bottom:1px solid var(--hairline);display:flex;justify-content:space-between;opacity:0;animation:fadeUp .5s .05s ease forwards;}
+    .hero-rule{height:5px;background:var(--ink);margin:14px 0 20px;opacity:0;animation:scaleX .5s .15s ease forwards;transform-origin:left;}
+    .hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;opacity:0;animation:fadeUp .5s .2s ease forwards;}
+    .headline{font-weight:900;letter-spacing:-.06em;line-height:.97;font-size:clamp(44px,7vw,90px);margin-bottom:0;opacity:0;animation:fadeUp .6s .25s ease forwards;}
+    .hero-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:28px;opacity:0;animation:fadeUp .6s .45s ease forwards;}
+    .hero-sub{font-size:clamp(15px,1.8vw,17px);color:var(--muted);line-height:1.6;letter-spacing:-.01em;}
+    .hero-sub-right{display:flex;flex-direction:column;justify-content:flex-end;gap:16px;}
+    .hero-rule-thin{height:1px;background:var(--hairline);margin:28px 0 20px;opacity:0;animation:fadeUp .4s .6s ease forwards;}
+    .hero-proof{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);line-height:1.9;opacity:0;animation:fadeUp .5s .7s ease forwards;}
+
+    /* Sections */
+    .section{padding-top:80px;margin-top:80px;border-top:1.5px solid var(--ink);}
+    .section-light{padding-top:72px;margin-top:72px;border-top:1px solid var(--hairline);}
+    .eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+    .h2{font-weight:900;letter-spacing:-.055em;font-size:clamp(22px,3vw,34px);line-height:1.05;margin-bottom:16px;}
+    .section-sub{font-size:14px;color:var(--muted);line-height:1.6;max-width:520px;margin-bottom:44px;}
+
+    /* Marquee */
+    .marquee-wrap{margin:0 -24px;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);overflow:hidden;padding:10px 0;background:var(--ink);}
+    .marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite;}
+    .marquee-track:hover{animation-play-state:paused;}
+    .marquee-item{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:0 22px;white-space:nowrap;display:flex;align-items:center;gap:22px;}
+    .marquee-item::after{content:"·";color:rgba(255,255,255,.25);font-size:14px;}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* Problem statement */
+    .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--hairline);border-right:none;border-bottom:none;}
+    .problem-cell{border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:32px 28px;}
+    .problem-cell.dark{background:var(--ink);color:#fff;}
+    .problem-cell.dark .cell-label{color:rgba(255,255,255,.4);}
+    .problem-cell.dark .cell-text{color:rgba(255,255,255,.85);}
+    .cell-label{font-family:var(--mono);font-size:9px;letter-spacing:.20em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+    .cell-title{font-weight:900;letter-spacing:-.05em;font-size:clamp(16px,2.2vw,22px);line-height:1.1;margin-bottom:10px;}
+    .cell-text{font-size:13px;color:var(--muted);line-height:1.65;}
+
+    /* Process nodes */
+    .process-flow{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--hairline);border-right:none;border-bottom:none;}
+    .pnode{border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:26px 20px;position:relative;}
+    .pnode-num{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+    .pnode-num::after{content:"";flex:1;height:1px;background:var(--hairline);}
+    .pnode-mark{width:8px;height:8px;border:1.5px solid rgba(10,10,10,.25);margin-bottom:14px;transition:background .35s,border-color .35s;}
+    .pnode.pulse .pnode-mark{background:var(--ink);border-color:var(--ink);}
+    .pnode-title{font-weight:900;font-size:14px;letter-spacing:-.04em;margin-bottom:7px;}
+    .pnode-body{font-size:12px;color:var(--muted);line-height:1.6;}
+
+    /* Services */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hairline);border-right:none;border-bottom:none;}
+    .service{border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:28px 22px;}
+    .service-num{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+    .service-title{font-weight:900;letter-spacing:-.04em;font-size:15px;margin-bottom:8px;line-height:1.2;}
+    .service-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+    .service-items{margin-top:12px;display:grid;gap:5px;}
+    .service-item{font-size:12px;color:var(--muted);padding-left:11px;position:relative;}
+    .service-item::before{content:"—";position:absolute;left:0;color:var(--dim);font-size:11px;}
+
+    /* Who it's for */
+    .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+    .body-text{font-size:14px;color:var(--muted);line-height:1.75;}
+    .body-text p+p{margin-top:14px;}
+    .who-list{display:grid;gap:0;border:1px solid var(--hairline);border-bottom:none;}
+    .who-item{border-bottom:1px solid var(--hairline);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
+    .who-check{width:6px;height:6px;background:var(--ink);border-radius:50%;flex-shrink:0;margin-top:5px;}
+    .who-text{font-size:13px;color:var(--ink);line-height:1.5;letter-spacing:-.01em;}
+
+    /* Contact form */
+    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+    .contact-left{}
+    .contact-lede{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:24px;}
+    .contact-detail{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:grid;gap:8px;}
+    .inquiry-note{margin-top:20px;padding:16px 18px;border:1px solid var(--hairline);background:rgba(10,10,10,.02);}
+    .inquiry-note p{font-size:12px;color:var(--muted);line-height:1.6;}
+    .inquiry-note strong{color:var(--ink);font-weight:700;}
+    .contact-form{display:grid;gap:12px;}
+    .contact-form input,.contact-form textarea,.contact-form select{padding:10px 13px;border-radius:2px;border:1px solid rgba(10,10,10,.14);background:rgba(10,10,10,.02);color:var(--ink);font:inherit;font-size:16px;letter-spacing:-.01em;width:100%;transition:border-color .18s;-webkit-appearance:none;}
+    @media(min-width:541px){.contact-form input,.contact-form textarea,.contact-form select{font-size:13px;}}
+    .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{outline:none;border-color:var(--ink);}
+    .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--dim);}
+    .contact-form textarea{resize:vertical;min-height:100px;}
+    .contact-form select{appearance:none;cursor:pointer;}
+    .form-note{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding-top:2px;}
+    .form-success{display:none;padding:44px 28px;border:1px solid var(--hairline);text-align:center;}
+    .form-success b{font-weight:900;letter-spacing:-.05em;font-size:22px;display:block;margin-bottom:8px;}
+    .form-success span{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:2;}
+
+    /* Footer */
+    .footer{margin-top:100px;padding-top:16px;border-top:1.5px solid var(--ink);display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap;}
+
+    /* Responsive */
+    @media(max-width:860px){
+      .problem-grid{grid-template-columns:1fr;}
+      .process-flow{grid-template-columns:1fr 1fr;}
+      .services-grid{grid-template-columns:1fr 1fr;}
+      .who-grid{grid-template-columns:1fr;gap:32px;}
+      .contact-wrap{grid-template-columns:1fr;gap:36px;}
+      .hero-col{grid-template-columns:1fr;}
+      .nav{display:none;}
+    }
+    @media(max-width:600px){
+      .page{padding:0 16px 100px;}
+      .topbar-inner{padding:10px 16px;}
+      .marquee-wrap{margin-left:-16px;margin-right:-16px;}
+      .hero{padding:52px 0 44px;}
+      .headline{font-size:clamp(38px,10vw,58px);}
+      .process-flow{grid-template-columns:1fr;}
+      .services-grid{grid-template-columns:1fr;}
+      .section{padding-top:60px;margin-top:60px;}
+      .section-light{padding-top:56px;margin-top:56px;}
+      .footer{flex-direction:column;align-items:flex-start;}
+    }
+    @media(pointer:coarse){.btn{cursor:pointer;min-height:44px;}.contact-form select{cursor:pointer;}}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+    @media(prefers-reduced-motion:reduce){
+      .grain,.marquee-track{animation:none !important;}
+      .reveal{opacity:1 !important;transform:none !important;}
+      .hero-dateline,.hero-rule,.hero-kicker,.headline,.hero-col,.hero-rule-thin,.hero-proof{opacity:1 !important;animation:none !important;transform:none !important;}
+      .pnode-mark{transition:none !important;}
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <a href="index.html"><b>[SCC]</b></a>
+        <span>Hospitality</span>
+      </div>
+      <nav class="nav">
+        <a href="artist.html">Artist Strategy</a>
+        <a href="audit.html">Audit</a>
+        <a href="hospitality.html" class="active">Hospitality</a>
+        <a href="about.html">About</a>
+      </nav>
+      <a class="btn primary" href="#contact">Inquire →</a>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-dateline">
+        <span>SCC · Hospitality &amp; Venues</span>
+        <span>Chicago, IL · Brand Strategy</span>
+      </div>
+      <div class="hero-rule"></div>
+      <p class="hero-kicker">Hospitality &amp; Venues</p>
+      <h1 class="headline" id="headline">Your venue<br/>has a world.<br/>We help people<br/>find it online.</h1>
+      <div class="hero-col">
+        <p class="hero-sub">Your space has energy. People feel it the moment they walk in. The problem is that online — on Instagram, on Google, on TikTok — none of that translates. We fix that.</p>
+        <div class="hero-sub-right">
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">We build content systems for venues that fill rooms — not just posts that disappear. Inquiry-based engagements, scoped to your operation.</p>
+          <a class="btn primary" href="#contact" style="align-self:flex-start;">Start a conversation →</a>
+        </div>
+      </div>
+      <div class="hero-rule-thin"></div>
+      <div class="hero-proof">Chicago-rooted · Hospitality + nightlife ecosystem · Brand-first, not post-first</div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-item">Venue Strategy</div>
+        <div class="marquee-item">Brand Diagnosis</div>
+        <div class="marquee-item">Content Systems</div>
+        <div class="marquee-item">Social Chicago Collective</div>
+        <div class="marquee-item">Fill Rooms</div>
+        <div class="marquee-item">Physical → Digital</div>
+        <div class="marquee-item">Chicago Nightlife</div>
+        <div class="marquee-item">Atmosphere → Audience</div>
+        <div class="marquee-item">Read the Signal</div>
+        <div class="marquee-item">Hospitality Branding</div>
+        <div class="marquee-item">Venue Strategy</div>
+        <div class="marquee-item">Brand Diagnosis</div>
+        <div class="marquee-item">Content Systems</div>
+        <div class="marquee-item">Social Chicago Collective</div>
+        <div class="marquee-item">Fill Rooms</div>
+        <div class="marquee-item">Physical → Digital</div>
+        <div class="marquee-item">Chicago Nightlife</div>
+        <div class="marquee-item">Atmosphere → Audience</div>
+        <div class="marquee-item">Read the Signal</div>
+        <div class="marquee-item">Hospitality Branding</div>
+      </div>
+    </div>
+
+    <!-- Problem / Opportunity -->
+    <section class="section" id="problem">
+      <p class="eyebrow reveal">The gap</p>
+      <h2 class="h2 reveal rd1">Real atmosphere. Digital flatline.</h2>
+      <p class="section-sub reveal rd2">Most venues have the energy. The problem is that none of it lives online.</p>
+      <div class="problem-grid">
+        <div class="problem-cell dark reveal rd1">
+          <div class="cell-label">The problem</div>
+          <div class="cell-title">Your Instagram looks like every other venue.</div>
+          <div class="cell-text" style="color:rgba(255,255,255,.6);">Generic repost formats. Inconsistent visual language. No through-line. People see your page and feel nothing — so they go somewhere else. The energy that fills your room on a Friday doesn't exist anywhere online.</div>
+        </div>
+        <div class="problem-cell reveal rd2">
+          <div class="cell-label">The opportunity</div>
+          <div class="cell-title">Your venue already has a world. It just needs a translation.</div>
+          <div class="cell-text">The atmosphere, the curation, the specific thing people come back for — all of that is signal. We extract it, systematize it, and build a digital presence that makes people feel the venue before they walk in the door.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section" id="process">
+      <p class="eyebrow reveal">How it works</p>
+      <h2 class="h2 reveal rd1">Same method. Different world.</h2>
+      <p class="section-sub reveal rd2">We run the same Diagnose → Design → Ship process — adapted to the rhythms and realities of a venue operation.</p>
+
+      <div class="process-flow" id="processFlow">
+        <div class="pnode reveal rd1" id="pn1">
+          <div class="pnode-num">01</div>
+          <div class="pnode-mark"></div>
+          <div class="pnode-title">Brand Diagnosis</div>
+          <div class="pnode-body">We read your venue — the space, the programming, the clientele, the vibe. What's actually working and what online presence is failing to communicate.</div>
+        </div>
+        <div class="pnode reveal rd2" id="pn2">
+          <div class="pnode-num">02</div>
+          <div class="pnode-mark"></div>
+          <div class="pnode-title">Identity Translation</div>
+          <div class="pnode-body">Positioning, visual language, and narrative direction. A brief that defines who your venue is for, what it stands for, and how that shows up across every channel.</div>
+        </div>
+        <div class="pnode reveal rd3" id="pn3">
+          <div class="pnode-num">03</div>
+          <div class="pnode-mark"></div>
+          <div class="pnode-title">Content System</div>
+          <div class="pnode-body">Repeatable content formats built for the hospitality lifecycle — events, nights, behind-the-scenes, culture — with a production workflow your team can execute.</div>
+        </div>
+        <div class="pnode reveal rd4" id="pn4">
+          <div class="pnode-num">04</div>
+          <div class="pnode-mark"></div>
+          <div class="pnode-title">Rollout + Momentum</div>
+          <div class="pnode-body">A launch plan tied to real moments — openings, bookings, seasons, campaigns. Built to compound, not spike once and disappear.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section-light" id="services">
+      <p class="eyebrow reveal">What's included</p>
+      <h2 class="h2 reveal rd1">Engagements we scope together.</h2>
+      <p class="section-sub reveal rd2">No fixed packages — we workshop the right scope for your venue, operation size, and goals. These are the modules we typically build from.</p>
+
+      <div class="services-grid">
+        <div class="service reveal rd1">
+          <div class="service-num">01</div>
+          <div class="service-title">Brand Diagnosis</div>
+          <div class="service-desc">The starting point. A deep read on your venue's real-world signal vs. what your digital presence communicates.</div>
+          <div class="service-items">
+            <div class="service-item">Identity audit + gap analysis</div>
+            <div class="service-item">Positioning brief</div>
+            <div class="service-item">Competitive landscape read</div>
+            <div class="service-item">Loom walkthrough + PDF deliverable</div>
+          </div>
+        </div>
+        <div class="service reveal rd2">
+          <div class="service-num">02</div>
+          <div class="service-title">Visual + Brand System</div>
+          <div class="service-desc">A full identity translation — the visual rules that make your venue recognizable across every digital surface.</div>
+          <div class="service-items">
+            <div class="service-item">Palette, type, texture direction</div>
+            <div class="service-item">Photography + content art direction</div>
+            <div class="service-item">Layout + composition rules</div>
+            <div class="service-item">Brand guide (usable, not decorative)</div>
+          </div>
+        </div>
+        <div class="service reveal rd3">
+          <div class="service-num">03</div>
+          <div class="service-title">Content System</div>
+          <div class="service-desc">Repeatable content formats built for your specific venue type, event programming, and social channels.</div>
+          <div class="service-items">
+            <div class="service-item">3–5 repeatable content pillars</div>
+            <div class="service-item">Hook patterns + caption frameworks</div>
+            <div class="service-item">Shot list + production workflow</div>
+            <div class="service-item">Editing logic + format specs</div>
+          </div>
+        </div>
+        <div class="service reveal rd1">
+          <div class="service-num">04</div>
+          <div class="service-title">Campaign + Event Strategy</div>
+          <div class="service-desc">Content and campaign strategy tied to real venue moments — openings, residencies, special events, seasonal programming.</div>
+          <div class="service-items">
+            <div class="service-item">Event rollout plans</div>
+            <div class="service-item">Pre/during/post content arcs</div>
+            <div class="service-item">Collaboration + partnership angles</div>
+            <div class="service-item">Flywheel distribution strategy</div>
+          </div>
+        </div>
+        <div class="service reveal rd2">
+          <div class="service-num">05</div>
+          <div class="service-title">Ongoing Retainer</div>
+          <div class="service-desc">Monthly partnership for venues that want the system running at full speed — strategy, iteration, and campaign support on an ongoing basis.</div>
+          <div class="service-items">
+            <div class="service-item">Weekly strategy + content review</div>
+            <div class="service-item">Format iteration + performance reads</div>
+            <div class="service-item">Campaign coordination</div>
+            <div class="service-item">Monthly reporting</div>
+          </div>
+        </div>
+        <div class="service reveal rd3" style="background:rgba(10,10,10,.02);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:40px 24px;">
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);">Every engagement starts with a conversation.</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;max-width:220px;">We scope to your venue, your team, and your goals. No fixed packages.</p>
+          <a class="btn primary" href="#contact" style="margin-top:4px;">Start the conversation →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section class="section-light" id="who">
+      <div class="who-grid">
+        <div class="reveal">
+          <p class="eyebrow">Who this is for</p>
+          <h2 class="h2">Venues with something real to say.</h2>
+          <div class="body-text">
+            <p>We work with operators who have genuine energy in their space but can't figure out why it doesn't translate online. Not venues that need more posts — venues that need a world.</p>
+            <p>Size doesn't matter. What matters is that there's a real identity to work with and an operator who wants to invest in getting it right.</p>
+          </div>
+        </div>
+        <div class="reveal rd2">
+          <p class="eyebrow" style="margin-bottom:18px;">Fits well if you are:</p>
+          <div class="who-list">
+            <div class="who-item"><div class="who-check"></div><div class="who-text">A restaurant, bar, club, or event space with a clear point of view</div></div>
+            <div class="who-item"><div class="who-check"></div><div class="who-text">An operator frustrated that your digital presence doesn't match your in-person experience</div></div>
+            <div class="who-item"><div class="who-check"></div><div class="who-text">A new venue that needs to establish presence before or at opening</div></div>
+            <div class="who-item"><div class="who-check"></div><div class="who-text">An established venue going through a rebrand or repositioning</div></div>
+            <div class="who-item"><div class="who-check"></div><div class="who-text">A venue with event programming that needs a stronger content flywheel</div></div>
+            <div class="who-item"><div class="who-check"></div><div class="who-text">Chicago-based (we understand the market) or open to working remotely</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="contact-wrap">
+        <div class="reveal">
+          <p class="eyebrow">Get started</p>
+          <h2 class="h2">Tell us about your venue.</h2>
+          <p class="contact-lede">Every hospitality engagement starts with a conversation. Tell us what you're working with and what you're trying to solve — we'll come back with a sense of scope and fit.</p>
+          <div class="contact-detail">
+            <span><a href="mailto:hello@socialchicagocollective.com" style="border-bottom:1px solid var(--dim);padding-bottom:1px;">hello@socialchicagocollective.com</a></span>
+            <span>Response time: 24–48 hours</span>
+            <span>Chicago-based · Remote available</span>
+          </div>
+          <div class="inquiry-note" style="margin-top:24px;">
+            <p><strong>No fixed pricing listed.</strong> We workshop the right scope for each venue. The form gets the conversation started — no commitment on either side until we've talked through what makes sense.</p>
+          </div>
+        </div>
+        <div class="reveal rd2">
+          <form class="contact-form" id="venueForm" name="venue-inquiry" data-netlify="true">
+            <label for="venue-name" class="sr-only">Venue name</label>
+            <input id="venue-name" name="venue" placeholder="Venue name" required />
+            <label for="venue-contact" class="sr-only">Your name</label>
+            <input id="venue-contact" name="name" placeholder="Your name" autocomplete="name" required />
+            <label for="venue-email" class="sr-only">Email</label>
+            <input id="venue-email" name="email" type="email" placeholder="Email" autocomplete="email" required />
+            <label for="venue-website" class="sr-only">Website / Instagram</label>
+            <input id="venue-website" name="website" placeholder="Website / Instagram" />
+            <label for="venue-type" class="sr-only">Venue type</label>
+            <select id="venue-type" name="type" required>
+              <option value="" disabled selected>Venue type</option>
+              <option value="restaurant">Restaurant</option>
+              <option value="bar">Bar</option>
+              <option value="club">Club / Nightlife</option>
+              <option value="event-space">Event space</option>
+              <option value="hotel">Hotel / Hospitality</option>
+              <option value="other">Other</option>
+            </select>
+            <label for="venue-stage" class="sr-only">Stage</label>
+            <select id="venue-stage" name="stage">
+              <option value="" disabled selected>Stage</option>
+              <option value="pre-opening">Pre-opening</option>
+              <option value="new">New (under 1 year)</option>
+              <option value="established">Established</option>
+              <option value="rebranding">Rebranding / repositioning</option>
+            </select>
+            <label for="venue-context" class="sr-only">Context</label>
+            <textarea id="venue-context" name="context" rows="4" placeholder="What's going on with your digital presence, and what are you trying to change?" required></textarea>
+            <button type="submit" class="btn primary block">Send →</button>
+            <div class="form-note">We reply within 24–48 hours · No commitment until we scope together</div>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <b>Got it.</b>
+            <span>We'll review your venue and come back<br/>within 24–48 hours with thoughts on fit and next steps.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer reveal">
+      <span>[SCC] · Social Chicago Collective · Culture Systems Studio</span>
+      <span>Chicago, IL</span>
+    </footer>
+  </main>
+
+  <script>
+  (function(){
+    var cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+    if(cur){
+      var mx=innerWidth/2,my=innerHeight/2,tx=mx,ty=my;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';document.body.classList.add('cursor-on');});
+      (function l(){tx+=(mx-tx)*.14;ty+=(my-ty)*.14;ring.style.left=tx+'px';ring.style.top=ty+'px';requestAnimationFrame(l);})();
+      document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});});
+    }
+
+    // Headline scramble
+    var hl=document.getElementById('headline');
+    if(hl){
+      var CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@&·—';
+      var nodes=[],origs=[];
+      function collect(n){if(n.nodeType===3&&n.textContent.trim()){nodes.push(n);origs.push(n.textContent);}else if(n.nodeType===1)Array.from(n.childNodes).forEach(collect);}
+      collect(hl);
+      var total=origs.join('').replace(/\s/g,'').length,t0=null,dur=900;
+      function frame(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),rev=Math.floor(p*total),ci=0;nodes.forEach(function(node,i){var orig=origs[i],out='';for(var c=0;c<orig.length;c++){var ch=orig[c];if(ch===' '||ch==='\n'){out+=ch;continue;}out+=ci<rev?ch:(Math.random()<.5?CHARS[Math.floor(Math.random()*CHARS.length)]:ch);ci++;}node.textContent=out;});if(p<1)requestAnimationFrame(frame);else nodes.forEach(function(n,i){n.textContent=origs[i];});}
+      setTimeout(function(){requestAnimationFrame(frame);},200);
+    }
+
+    // Reveals
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+    // Process pulse
+    var pnodes=document.querySelectorAll('.pnode'),pulsed=false;
+    new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!pulsed){pulsed=true;pnodes.forEach(function(n,i){setTimeout(function(){n.classList.add('pulse');},i*160);});}});},{threshold:.3}).observe(document.getElementById('process'));
+
+    // Form
+    var form=document.getElementById('venueForm'),succ=document.getElementById('formSuccess');
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();var b=form.querySelector('button[type="submit"]');b.textContent='Sending…';b.disabled=true;
+      try{var r=await fetch('/',{method:'POST',body:new URLSearchParams(new FormData(form)).toString(),headers:{'Content-Type':'application/x-www-form-urlencoded'}});
+        if(r.ok){form.style.display='none';succ.style.display='block';}
+        else{b.textContent='Error — try again';b.disabled=false;}}
+      catch(err){b.textContent='Error — try again';b.disabled=false;}
+    });
+  })();
+  </script>
+</body>
+</html>
