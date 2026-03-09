@@ -157,6 +157,23 @@
     .form-success b{font-weight:900;letter-spacing:-.05em;font-size:22px;display:block;margin-bottom:8px;}
     .form-success span{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:2;}
 
+    /* Mobile menu */
+    .menu-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex-direction:column;gap:4px;z-index:600;}
+    .menu-btn span{display:block;width:18px;height:1.5px;background:var(--ink);transition:transform .2s,opacity .2s;}
+    .menu-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+    .menu-btn.open span:nth-child(2){opacity:0;}
+    .menu-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+    .mobile-nav{display:none;}
+    @media(max-width:860px){
+      .menu-btn{display:flex;}
+      .mobile-nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--ink);padding:16px 24px;flex-direction:column;gap:2px;}
+      .mobile-nav.open{display:flex;}
+      .mobile-nav a{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--hairline);transition:color .14s;}
+      .mobile-nav a:last-child{border-bottom:none;}
+      .mobile-nav a:hover,.mobile-nav a.active{color:var(--ink);}
+    }
+    @media(pointer:coarse){.menu-btn{cursor:pointer;min-height:44px;min-width:44px;align-items:center;justify-content:center;}}
+
     /* Footer */
     .footer{margin-top:100px;padding-top:16px;border-top:1.5px solid var(--ink);display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap;}
 
@@ -210,7 +227,14 @@
         <a href="about.html">About</a>
       </nav>
       <a class="btn primary" href="#contact">Inquire →</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="artist.html">Artist Strategy</a>
+      <a href="audit.html">Audit</a>
+      <a href="hospitality.html" class="active">Hospitality</a>
+      <a href="about.html">About</a>
+    </nav>
   </header>
 
   <main class="page">
@@ -482,6 +506,10 @@
       (function l(){tx+=(mx-tx)*.14;ty+=(my-ty)*.14;ring.style.left=tx+'px';ring.style.top=ty+'px';requestAnimationFrame(l);})();
       document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});});
     }
+
+    // Mobile menu
+    var mb=document.getElementById('menuBtn'),mn=document.getElementById('mobileNav');
+    if(mb&&mn){mb.addEventListener('click',function(){mb.classList.toggle('open');mn.classList.toggle('open');});}
 
     // Headline scramble
     var hl=document.getElementById('headline');

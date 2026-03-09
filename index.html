@@ -257,6 +257,23 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
     .rd1 { transition-delay:.07s; } .rd2 { transition-delay:.15s; } .rd3 { transition-delay:.24s; }
 
+    /* ── MOBILE MENU ── */
+    .menu-btn { display:none; background:none; border:none; padding:6px; cursor:pointer; flex-direction:column; gap:4px; z-index:600; }
+    .menu-btn span { display:block; width:18px; height:1.5px; background:var(--ink); transition:transform .2s, opacity .2s; }
+    .menu-btn.open span:nth-child(1) { transform:translateY(5.5px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity:0; }
+    .menu-btn.open span:nth-child(3) { transform:translateY(-5.5px) rotate(-45deg); }
+    .mobile-nav { display:none; }
+    @media(max-width:860px){
+      .menu-btn { display:flex; }
+      .mobile-nav { display:none; position:absolute; top:100%; left:0; right:0; background:rgba(255,255,255,.97); backdrop-filter:blur(14px); border-bottom:1.5px solid var(--ink); padding:16px 24px; flex-direction:column; gap:2px; }
+      .mobile-nav.open { display:flex; }
+      .mobile-nav a { font-family:var(--mono); font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); padding:10px 0; border-bottom:1px solid var(--hairline); transition:color .14s; }
+      .mobile-nav a:last-child { border-bottom:none; }
+      .mobile-nav a:hover, .mobile-nav a.active { color:var(--ink); }
+    }
+    @media(pointer:coarse){ .menu-btn { cursor:pointer; min-height:44px; min-width:44px; align-items:center; justify-content:center; } }
+
     /* ── FOOTER ── */
     .footer { margin-top:100px; padding-top:16px; border-top:1.5px solid var(--ink); display:flex; justify-content:space-between; align-items:center; gap:12px; font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); flex-wrap:wrap; }
 
@@ -310,7 +327,14 @@
         <a href="about.html">About</a>
       </nav>
       <a class="btn primary" href="audit.html">Get an Audit →</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="artist.html">Artist Strategy</a>
+      <a href="audit.html">Audit</a>
+      <a href="hospitality.html">Hospitality</a>
+      <a href="about.html">About</a>
+    </nav>
   </header>
 
   <main class="page">
@@ -482,6 +506,10 @@
       function frame(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1),rev=Math.floor(p*total),ci=0; nodes.forEach(function(node,i){ var orig=origs[i],out=''; for(var c=0;c<orig.length;c++){ var ch=orig[c]; if(ch===' '||ch==='\n'){out+=ch;continue;} out+=ci<rev?ch:(Math.random()<.5?CHARS[Math.floor(Math.random()*CHARS.length)]:ch); ci++; } node.textContent=out; }); if(p<1)requestAnimationFrame(frame); else nodes.forEach(function(n,i){n.textContent=origs[i];}); }
       setTimeout(function(){requestAnimationFrame(frame);},200);
     }
+
+    // Mobile menu
+    var mb=document.getElementById('menuBtn'),mn=document.getElementById('mobileNav');
+    if(mb&&mn){mb.addEventListener('click',function(){mb.classList.toggle('open');mn.classList.toggle('open');});}
 
     // Reveals
     var obs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting)e.target.classList.add('visible'); }); },{threshold:.1});
