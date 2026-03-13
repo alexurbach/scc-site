@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1Z8V05SDK"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X1Z8V05SDK');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work — Social Addict Case Study · SCC</title>
+  <meta name="description" content="How SCC built Social Addict from zero to 1.3M+ followers and 1B+ views using the same positioning, format engineering, and world-system approach we now deploy for clients." />
+  <meta property="og:title" content="Work — Social Addict Case Study · SCC" />
+  <meta property="og:description" content="From zero to 1.3M+ followers. How we built Social Addict using the same system we now sell." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://socialchicagocollective.com/work" />
+  <meta property="og:image" content="https://socialchicagocollective.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Work — Social Addict Case Study · SCC" />
+  <meta name="twitter:description" content="From zero to 1.3M+ followers. The system behind the numbers." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="canonical" href="https://socialchicagocollective.com/work" />
+  <style>
+    :root{--bg:#ffffff;--ink:#0a0a0a;--muted:rgba(10,10,10,.50);--dim:rgba(10,10,10,.26);--hairline:rgba(10,10,10,.11);--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;--sans:Helvetica,Arial,ui-sans-serif,system-ui,-apple-system,sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;}
+    body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:-.02em;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+    ::selection{background:var(--ink);color:var(--bg);}
+
+    .grain{display:none;}
+    @media(pointer:fine){.grain{display:block;position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.20;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");background-size:140px 140px;animation:grainShift .1s steps(1) infinite;}}
+    @keyframes grainShift{0%{background-position:0 0;}12%{background-position:-40px 18px;}24%{background-position:22px -34px;}36%{background-position:-14px 44px;}48%{background-position:48px -10px;}60%{background-position:-32px 26px;}72%{background-position:12px -48px;}84%{background-position:-54px 12px;}}
+
+    #cursor,#cursor-ring{display:none;}
+    @media(pointer:fine){
+      body{cursor:none;}
+      #cursor{display:block;position:fixed;top:0;left:0;z-index:10000;width:6px;height:6px;background:var(--ink);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .12s,height .12s;}
+      #cursor-ring{display:block;position:fixed;top:0;left:0;z-index:9999;width:28px;height:28px;border:1px solid rgba(10,10,10,.22);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .25s,width .15s,height .15s;opacity:0;}
+      body.cursor-on #cursor-ring{opacity:1;}
+      body.hovering #cursor{width:10px;height:10px;}
+      body.hovering #cursor-ring{width:36px;height:36px;border-color:rgba(10,10,10,.35);}
+    }
+
+    .topbar{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--ink);}
+    .topbar-inner{max-width:1080px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .brand{display:flex;align-items:baseline;gap:10px;}
+    .brand b{font-weight:900;letter-spacing:-.07em;font-size:15px;text-transform:uppercase;}
+    .brand span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+    .nav{display:flex;gap:4px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+    .nav a{padding:6px 10px;border-radius:2px;transition:background .12s;}
+    .nav a:hover{background:rgba(10,10,10,.06);}
+    .nav a.active{color:var(--ink);}
+    .btn{border:1.5px solid var(--ink);border-radius:2px;padding:7px 16px;font-size:12px;font-weight:800;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--ink);cursor:pointer;transition:background .14s,color .14s;font-family:inherit;}
+    @media(pointer:fine){.btn{cursor:none;}}
+    .btn:hover{background:var(--ink);color:#fff;}
+    .btn.primary{background:var(--ink);color:#fff;}
+    .btn.primary:hover{background:#2a2a2a;}
+    .btn.outline{background:transparent;color:var(--ink);}
+    .btn.outline:hover{background:var(--ink);color:#fff;}
+
+    .page{max-width:1080px;margin:0 auto;padding:0 24px 120px;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleX{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .rd1{transition-delay:.07s;}.rd2{transition-delay:.16s;}.rd3{transition-delay:.25s;}.rd4{transition-delay:.34s;}
+
+    /* Hero */
+    .hero{padding:80px 0 64px;}
+    .hero-dateline{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);padding-bottom:12px;border-bottom:1px solid var(--hairline);display:flex;justify-content:space-between;opacity:0;animation:fadeUp .5s .05s ease forwards;}
+    .hero-rule{height:5px;background:var(--ink);margin:14px 0 20px;opacity:0;animation:scaleX .5s .15s ease forwards;transform-origin:left;}
+    .hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;opacity:0;animation:fadeUp .5s .2s ease forwards;}
+    .headline{font-weight:900;letter-spacing:-.06em;line-height:.97;font-size:clamp(44px,7vw,90px);margin-bottom:20px;opacity:0;animation:fadeUp .6s .25s ease forwards;}
+    .hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--muted);line-height:1.55;max-width:600px;letter-spacing:-.01em;opacity:0;animation:fadeUp .6s .45s ease forwards;}
+
+    /* Sections */
+    .section{padding-top:80px;margin-top:80px;border-top:1.5px solid var(--ink);}
+    .section-light{padding-top:72px;margin-top:72px;border-top:1px solid var(--hairline);}
+    .eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+    .h2{font-weight:900;letter-spacing:-.055em;font-size:clamp(22px,3vw,34px);line-height:1.05;margin-bottom:16px;}
+    .section-sub{font-size:14px;color:var(--muted);line-height:1.6;max-width:520px;margin-bottom:44px;}
+
+    /* Stats hero row */
+    .stats-hero{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink);border-right:none;border-bottom:none;margin-top:40px;}
+    .stat-hero{padding:28px 22px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);}
+    .stat-hero .n{font-weight:900;letter-spacing:-.07em;font-size:clamp(32px,4vw,48px);line-height:1;display:block;margin-bottom:8px;}
+    .stat-hero .d{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+
+    /* Two col */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+    .body-text{font-size:14px;color:var(--muted);line-height:1.75;}
+    .body-text p+p{margin-top:14px;}
+    .body-text strong{color:var(--ink);font-weight:700;}
+
+    /* Timeline */
+    .timeline{border:1px solid var(--hairline);border-bottom:none;}
+    .tl-item{border-bottom:1px solid var(--hairline);padding:20px 22px;display:grid;grid-template-columns:100px 1fr;gap:20px;align-items:start;}
+    .tl-phase{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding-top:3px;}
+    .tl-content b{font-weight:900;letter-spacing:-.04em;font-size:14px;display:block;margin-bottom:4px;}
+    .tl-content span{font-size:13px;color:var(--muted);line-height:1.55;}
+
+    /* Pull quote */
+    .pull-quote{padding:48px 0;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);margin:72px 0;}
+    .pull-quote blockquote{font-weight:900;letter-spacing:-.058em;line-height:1.0;font-size:clamp(24px,3.5vw,48px);max-width:860px;}
+    .pull-quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-top:20px;}
+
+    /* Logos */
+    .logo-bar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--hairline);border-right:none;border-bottom:none;margin-top:32px;}
+    .logo-mark{border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:16px 20px;font-weight:900;letter-spacing:-.04em;font-size:13px;color:var(--dim);transition:color .14s;}
+    .logo-mark:hover{color:var(--ink);}
+
+    /* Format examples grid */
+    .format-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hairline);border-right:none;border-bottom:none;}
+    .format-cell{border-right:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding:24px 20px;}
+    .format-num{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+    .format-title{font-weight:900;letter-spacing:-.04em;font-size:14px;margin-bottom:6px;}
+    .format-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+    /* Receipts */
+    .receipts{border:1px solid var(--hairline);border-bottom:none;}
+    .receipt{border-bottom:1px solid var(--hairline);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;}
+    .receipt-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);}
+    .receipt-val{font-weight:900;letter-spacing:-.03em;font-size:14px;}
+
+    /* CTA */
+    .cta-strip{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:32px 0;border-top:1.5px solid var(--ink);margin-top:80px;}
+    .cta-strip-text b{font-weight:900;letter-spacing:-.05em;font-size:18px;display:block;margin-bottom:6px;}
+    .cta-strip-text span{font-size:14px;color:var(--muted);}
+    .cta-strip-btns{display:flex;gap:10px;flex-wrap:wrap;}
+
+    /* Mobile menu */
+    .menu-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex-direction:column;gap:4px;z-index:600;}
+    .menu-btn span{display:block;width:18px;height:1.5px;background:var(--ink);transition:transform .2s,opacity .2s;}
+    .menu-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+    .menu-btn.open span:nth-child(2){opacity:0;}
+    .menu-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+    .mobile-nav{display:none;}
+    @media(max-width:860px){
+      .menu-btn{display:flex;}
+      .mobile-nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--ink);padding:16px 24px;flex-direction:column;gap:2px;}
+      .mobile-nav.open{display:flex;}
+      .mobile-nav a{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--hairline);transition:color .14s;}
+      .mobile-nav a:last-child{border-bottom:none;}
+      .mobile-nav a:hover,.mobile-nav a.active{color:var(--ink);}
+    }
+
+    .footer{margin-top:80px;padding-top:16px;border-top:1.5px solid var(--ink);display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap;}
+
+    @media(max-width:860px){
+      .stats-hero{grid-template-columns:repeat(2,1fr);}
+      .two-col{grid-template-columns:1fr;gap:32px;}
+      .format-grid{grid-template-columns:1fr;}
+      .tl-item{grid-template-columns:1fr;gap:6px;}
+      .nav{display:none;}
+    }
+    @media(max-width:600px){
+      .page{padding:0 16px 100px;}
+      .topbar-inner{padding:10px 16px;}
+      .hero{padding:52px 0 48px;}
+      .headline{font-size:clamp(38px,10vw,60px);}
+      .stats-hero{grid-template-columns:1fr 1fr;}
+      .section{padding-top:60px;margin-top:60px;}
+      .section-light{padding-top:56px;margin-top:56px;}
+      .pull-quote{margin:52px 0;}
+      .cta-strip{flex-direction:column;align-items:flex-start;}
+      .footer{flex-direction:column;align-items:flex-start;}
+    }
+    @media(pointer:coarse){.btn{cursor:pointer;min-height:44px;}.menu-btn{cursor:pointer;min-height:44px;min-width:44px;align-items:center;justify-content:center;}}
+    @media(prefers-reduced-motion:reduce){.grain{animation:none !important;}.reveal{opacity:1 !important;transform:none !important;}.hero-dateline,.hero-rule,.hero-kicker,.headline,.hero-sub{opacity:1 !important;animation:none !important;transform:none !important;}}
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <a href="index.html"><b>[SCC]</b></a>
+        <span>Work</span>
+      </div>
+      <nav class="nav">
+        <a href="artist.html">Artist Strategy</a>
+        <a href="nightlife.html">Nightlife</a>
+        <a href="work.html" class="active">Work</a>
+        <a href="about.html">About</a>
+      </nav>
+      <a class="btn primary" href="artist.html#contact">Request audit</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="artist.html">Artist Strategy</a>
+      <a href="nightlife.html">Nightlife</a>
+      <a href="work.html" class="active">Work</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <section class="hero">
+      <div class="hero-dateline">
+        <span>SCC · Work · Case Study</span>
+        <span>Social Addict · 2019-Present</span>
+      </div>
+      <div class="hero-rule"></div>
+      <p class="hero-kicker">Proof of System</p>
+      <h1 class="headline">We don't show client work publicly.<br/>We show the system.</h1>
+      <p class="hero-sub">Social Addict is how we proved the approach works — a music culture platform built from zero to 1.3M+ followers using the same positioning, format engineering, and world-system methodology behind every SCC engagement. Artists, restaurants, venues — the system is the same.</p>
+
+      <div class="stats-hero">
+        <div class="stat-hero reveal rd1"><span class="n">1.3M+</span><span class="d">Followers</span></div>
+        <div class="stat-hero reveal rd2"><span class="n">1B+</span><span class="d">Views &amp; impressions</span></div>
+        <div class="stat-hero reveal rd3"><span class="n">$0</span><span class="d">Paid promotion</span></div>
+        <div class="stat-hero reveal rd4"><span class="n">25+</span><span class="d">Brand partnerships</span></div>
+      </div>
+    </section>
+
+    <!-- The Challenge -->
+    <section class="section">
+      <div class="two-col">
+        <div class="reveal">
+          <p class="eyebrow">The challenge</p>
+          <h2 class="h2">Build an audience from nothing in the most saturated space on the internet.</h2>
+          <div class="body-text">
+            <p>Music culture commentary is one of the most crowded categories on Instagram and TikTok. Millions of pages post clips, hot takes, and fan edits. Most of them look identical — same formats, same hooks, same voice.</p>
+            <p>The challenge wasn't just growing. It was <strong>standing out in a space where everyone is doing the same thing</strong> — and doing it with no budget, no team, no industry connections, and no paid promotion.</p>
+            <p>The question was: can positioning alone — the right identity, the right formats, the right consistency — cut through noise that loud?</p>
+          </div>
+        </div>
+        <div class="reveal rd2">
+          <p class="eyebrow" style="margin-bottom:18px;">Starting point</p>
+          <div class="receipts">
+            <div class="receipt"><span class="receipt-label">Followers</span><span class="receipt-val">0</span></div>
+            <div class="receipt"><span class="receipt-label">Budget</span><span class="receipt-val">$0</span></div>
+            <div class="receipt"><span class="receipt-label">Team</span><span class="receipt-val">1 person</span></div>
+            <div class="receipt"><span class="receipt-label">Paid promotion</span><span class="receipt-val">None, ever</span></div>
+            <div class="receipt"><span class="receipt-label">Industry connections</span><span class="receipt-val">None at start</span></div>
+            <div class="receipt"><span class="receipt-label">Category</span><span class="receipt-val">Music / Hip-Hop / Culture</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Approach -->
+    <section class="section">
+      <p class="eyebrow reveal">The approach</p>
+      <h2 class="h2 reveal rd1">Diagnose. Design. Ship. The same system we sell.</h2>
+      <p class="section-sub reveal rd2">The method that built Social Addict is identical to what SCC deploys for clients. Three moves, applied with discipline.</p>
+
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-phase">Phase 01</div>
+          <div class="tl-content">
+            <b>Diagnose the Signal</b>
+            <span>Identified a gap in the music commentary space: most pages were disposable clip aggregators with no identity. The opportunity was building a page that felt like a <strong>place</strong> — a world with a consistent voice, aesthetic, and editorial stance — not just a feed.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-phase">Phase 02</div>
+          <div class="tl-content">
+            <b>Design the World</b>
+            <span>Built a positioning thesis: Social Addict would be the intersection of hip-hop, house, techno, and cultural commentary — with a voice that was opinionated, not neutral. Visual system: dark palette, high contrast, monospace type, editorial layout. Every post was designed to feel like it came from one coherent place.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-phase">Phase 03</div>
+          <div class="tl-content">
+            <b>Build the Format Engine</b>
+            <span>Engineered 5-7 repeatable content formats — each with a hook pattern, visual template, and production workflow that could be executed daily. Not random posts. A system designed to compound: every new piece reinforced the world, built on the last, and created pattern recognition.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-phase">Phase 04</div>
+          <div class="tl-content">
+            <b>Ship with Momentum</b>
+            <span>Executed the system with relentless consistency. Formats compounded. The world became recognizable. The audience grew because every touchpoint — every post, story, reel — reinforced a single identity. No pivots, no trend-chasing, no dilution.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pull quote -->
+    <div class="pull-quote reveal">
+      <blockquote>"The brands that win aren't posting more. They've built a world people want to live inside."</blockquote>
+      <cite>— The principle behind Social Addict's growth</cite>
+    </div>
+
+    <!-- The Format Engine -->
+    <section class="section-light">
+      <p class="eyebrow reveal">The format engine</p>
+      <h2 class="h2 reveal rd1">Repeatable formats. Not random content.</h2>
+      <p class="section-sub reveal rd2">Every piece of content Social Addict publishes follows one of a small set of engineered formats. Each format has a hook pattern, visual structure, and role in the system.</p>
+
+      <div class="format-grid">
+        <div class="format-cell reveal rd1">
+          <div class="format-num">Format 01</div>
+          <div class="format-title">Cultural Commentary</div>
+          <div class="format-desc">Opinionated takes on moments in music culture. Hook: provocation or surprise. Visual: text-heavy, editorial. Role: voice and stance.</div>
+        </div>
+        <div class="format-cell reveal rd2">
+          <div class="format-num">Format 02</div>
+          <div class="format-title">Sample Breakdowns</div>
+          <div class="format-desc">Revealing the sample origins behind iconic tracks. Hook: recognition and nostalgia. Visual: split-screen, before/after. Role: education and share-ability.</div>
+        </div>
+        <div class="format-cell reveal rd3">
+          <div class="format-num">Format 03</div>
+          <div class="format-title">Artist Spotlights</div>
+          <div class="format-desc">Deep context on emerging and established artists. Hook: discovery or re-contextualization. Visual: portrait-focused. Role: community and authority.</div>
+        </div>
+        <div class="format-cell reveal rd1">
+          <div class="format-num">Format 04</div>
+          <div class="format-title">Production Insights</div>
+          <div class="format-desc">Inside the making of music — gear, technique, studio culture. Hook: insider access. Visual: process-focused. Role: niche depth and credibility.</div>
+        </div>
+        <div class="format-cell reveal rd2">
+          <div class="format-num">Format 05</div>
+          <div class="format-title">Moment Captures</div>
+          <div class="format-desc">Live performance clips, studio sessions, cultural events. Hook: energy and raw signal. Visual: unpolished, real. Role: proof of presence and taste.</div>
+        </div>
+        <div class="format-cell reveal rd3">
+          <div class="format-num">Format 06</div>
+          <div class="format-title">List / Ranking Formats</div>
+          <div class="format-desc">Curated lists that invite debate and engagement. Hook: opinion + controversy. Visual: numbered, clean. Role: engagement driver and share trigger.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section">
+      <p class="eyebrow reveal">The results</p>
+      <h2 class="h2 reveal rd1">The system worked. The labels noticed.</h2>
+      <p class="section-sub reveal rd2">Growth attracted partnerships with the biggest names in music. Every partnership was inbound — they came to us because the positioning made Social Addict undeniable in the space.</p>
+
+      <div class="two-col">
+        <div class="reveal">
+          <div class="body-text">
+            <p>Social Addict grew from zero to <strong>1.3M+ followers</strong> and <strong>1B+ views</strong> without spending a dollar on promotion. The entire trajectory was organic — built on positioning, format engineering, and consistency.</p>
+            <p>The audience growth attracted major label partnerships: <strong>Sony Music, Atlantic Records, Warner Music Group, GOOD Music</strong>. Artist collaborations with <strong>Teyana Taylor, Elton John</strong>, and 25+ other global brands and artists.</p>
+            <p>Every one of those partnerships was inbound. No outreach, no pitching. They found Social Addict because the world was built well enough to be undeniable.</p>
+            <p><strong>That's the proof.</strong> The same system — positioning, world design, format engine — applied to a different subject (you, your brand, your venue) produces the same effect: a recognizable world that attracts the right people.</p>
+          </div>
+        </div>
+        <div class="reveal rd2">
+          <p class="eyebrow" style="margin-bottom:18px;">Results snapshot</p>
+          <div class="receipts">
+            <div class="receipt"><span class="receipt-label">Followers</span><span class="receipt-val">1.3M+</span></div>
+            <div class="receipt"><span class="receipt-label">Views</span><span class="receipt-val">1B+</span></div>
+            <div class="receipt"><span class="receipt-label">Paid spend</span><span class="receipt-val">$0</span></div>
+            <div class="receipt"><span class="receipt-label">Platforms</span><span class="receipt-val">Instagram + TikTok</span></div>
+            <div class="receipt"><span class="receipt-label">Partnerships</span><span class="receipt-val">25+ (all inbound)</span></div>
+            <div class="receipt"><span class="receipt-label">Labels</span><span class="receipt-val">Sony, Atlantic, WMG</span></div>
+            <div class="receipt"><span class="receipt-label">Artists</span><span class="receipt-val">Teyana Taylor, Elton John</span></div>
+            <div class="receipt"><span class="receipt-label">Method</span><span class="receipt-val">Same system you get</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="eyebrow reveal" style="margin-top:44px;margin-bottom:18px;">Brands and labels that came to us</p>
+      <div class="logo-bar reveal">
+        <div class="logo-mark">Sony Music</div>
+        <div class="logo-mark">Atlantic Records</div>
+        <div class="logo-mark">Warner Music Group</div>
+        <div class="logo-mark">GOOD Music</div>
+        <div class="logo-mark">Teyana Taylor</div>
+        <div class="logo-mark">Elton John</div>
+        <div class="logo-mark">Tracklib</div>
+      </div>
+    </section>
+
+    <!-- The Takeaway -->
+    <section class="section-light">
+      <div class="two-col">
+        <div class="reveal">
+          <p class="eyebrow">The takeaway</p>
+          <h2 class="h2">This isn't a portfolio piece. It's proof the system works.</h2>
+          <div class="body-text">
+            <p>Most agencies show you client work. We're showing you what we built for ourselves — before we ever had a client — using the exact system we now deploy.</p>
+            <p>Social Addict was the testing ground. Every principle in a Venue Identity Audit, every module in a World System Build, every format in the Format Engine — all of it was developed, tested, and proven here first. The subject was music. The system is universal.</p>
+            <p>When you work with SCC, you're not buying a methodology someone read about. You're buying a system with 1.3 million receipts.</p>
+          </div>
+        </div>
+        <div class="reveal rd2">
+          <p class="eyebrow" style="margin-bottom:18px;">System components</p>
+          <div class="receipts">
+            <div class="receipt"><span class="receipt-label">01</span><span class="receipt-val">Positioning Thesis</span></div>
+            <div class="receipt"><span class="receipt-label">02</span><span class="receipt-val">World System Design</span></div>
+            <div class="receipt"><span class="receipt-label">03</span><span class="receipt-val">Visual Identity Rules</span></div>
+            <div class="receipt"><span class="receipt-label">04</span><span class="receipt-val">Format Engine (5-7 formats)</span></div>
+            <div class="receipt"><span class="receipt-label">05</span><span class="receipt-val">Campaign / Rollout Plan</span></div>
+            <div class="receipt"><span class="receipt-label">06</span><span class="receipt-val">Consistency Protocol</span></div>
+          </div>
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:16px;line-height:1.8;">Every component above is what you receive — whether it's an Artist World Audit, a Venue Identity Audit, or a full system build.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-strip reveal">
+      <div class="cta-strip-text">
+        <b>Want the same system applied to your brand?</b>
+        <span>Start with a $549 Artist World Audit or request a Venue Identity Audit.</span>
+      </div>
+      <div class="cta-strip-btns">
+        <a class="btn primary" href="artist.html#contact">Request audit</a>
+        <a class="btn outline" href="nightlife.html#contact">Venue audit</a>
+      </div>
+    </div>
+
+    <footer class="footer reveal">
+      <span>[SCC] · Social Chicago Collective · Culture Systems Studio</span>
+      <span><a href="mailto:alex@socialchicagocollective.com" style="transition:color .14s;" onmouseenter="this.style.color='#0a0a0a'" onmouseleave="this.style.color=''">alex@socialchicagocollective.com</a></span>
+      <span>Chicago, IL · <a href="privacy.html" style="border-bottom:1px solid var(--dim);padding-bottom:1px;transition:border-color .14s;" onmouseenter="this.style.borderColor='#0a0a0a'" onmouseleave="this.style.borderColor=''">Privacy</a></span>
+    </footer>
+
+  </main>
+
+  <script>
+  (function(){
+    var cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+    if(cur){
+      var mx=innerWidth/2,my=innerHeight/2,tx=mx,ty=my;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';document.body.classList.add('cursor-on');});
+      (function l(){tx+=(mx-tx)*.14;ty+=(my-ty)*.14;ring.style.left=tx+'px';ring.style.top=ty+'px';requestAnimationFrame(l);})();
+      document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});});
+    }
+    var mb=document.getElementById('menuBtn'),mn=document.getElementById('mobileNav');
+    if(mb&&mn){mb.addEventListener('click',function(){mb.classList.toggle('open');mn.classList.toggle('open');});}
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+  })();
+  </script>
+</body>
+</html>
