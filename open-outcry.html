@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1Z8V05SDK"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-X1Z8V05SDK');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Outcry Brewing — Cultural Positioning Strategy · SCC</title>
+  <meta name="description" content="A cultural positioning strategy prepared for Open Outcry Brewing Company by Social Chicago Collective." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0a0a0a; --muted:rgba(10,10,10,.50);
+      --dim:rgba(10,10,10,.26); --hairline:rgba(10,10,10,.11);
+      --warm:#b8892a; --warm-bg:rgba(184,137,42,.06); --warm-glow:rgba(184,137,42,.12);
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      --sans:Helvetica,Arial,ui-sans-serif,system-ui,-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    html,body{height:100%;}
+    body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;letter-spacing:-0.02em;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+    ::selection{background:var(--ink);color:var(--bg);}
+
+    .grain{display:none;}
+    @media(pointer:fine){
+      .grain{display:block;position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.20;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");background-size:140px 140px;animation:grainShift .1s steps(1) infinite;}
+    }
+    @keyframes grainShift{0%{background-position:0 0;}12%{background-position:-40px 18px;}24%{background-position:22px -34px;}36%{background-position:-14px 44px;}48%{background-position:48px -10px;}60%{background-position:-32px 26px;}72%{background-position:12px -48px;}84%{background-position:-54px 12px;}}
+
+    #cursor,#cursor-ring{display:none;}
+    @media(pointer:fine){
+      body{cursor:none;}
+      #cursor{display:block;position:fixed;top:0;left:0;z-index:10000;width:6px;height:6px;background:var(--ink);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .12s,height .12s;}
+      #cursor-ring{display:block;position:fixed;top:0;left:0;z-index:9999;width:28px;height:28px;border:1px solid rgba(10,10,10,.22);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .25s,width .15s,height .15s;opacity:0;}
+      body.cursor-on #cursor-ring{opacity:1;}
+      body.hovering #cursor{width:10px;height:10px;}
+      body.hovering #cursor-ring{width:36px;height:36px;border-color:rgba(10,10,10,.35);}
+    }
+
+    /* Topbar */
+    .topbar{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--ink);}
+    .topbar-inner{max-width:760px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .brand{display:flex;align-items:baseline;gap:10px;}
+    .brand b{font-weight:900;letter-spacing:-.07em;font-size:15px;text-transform:uppercase;}
+    .brand span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+    .nav{display:flex;gap:4px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+    .nav a{padding:6px 10px;border-radius:2px;transition:background .12s;}
+    .nav a:hover{background:rgba(10,10,10,.06);}
+    .btn{border:1.5px solid var(--ink);border-radius:2px;padding:7px 16px;font-size:12px;font-weight:800;letter-spacing:-.01em;display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--ink);cursor:pointer;transition:background .14s,color .14s;font-family:inherit;}
+    @media(pointer:fine){.btn{cursor:none;}}
+    .btn:hover{background:var(--ink);color:#fff;}
+    .btn.primary{background:var(--ink);color:#fff;}
+    .btn.primary:hover{background:#2a2a2a;}
+    .btn.block{width:100%;border-radius:3px;padding:13px 16px;font-size:13px;}
+    .btn.warm{background:var(--warm);color:#fff;border-color:var(--warm);}
+    .btn.warm:hover{background:#9a7322;border-color:#9a7322;}
+
+    /* Mobile menu */
+    .menu-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex-direction:column;gap:4px;z-index:600;}
+    .menu-btn span{display:block;width:18px;height:1.5px;background:var(--ink);transition:transform .2s,opacity .2s;}
+    .menu-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+    .menu-btn.open span:nth-child(2){opacity:0;}
+    .menu-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+    .mobile-nav{display:none;}
+    @media(max-width:760px){
+      .menu-btn{display:flex;}
+      .nav{display:none;}
+      .mobile-nav{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1.5px solid var(--ink);padding:16px 24px;flex-direction:column;gap:2px;}
+      .mobile-nav.open{display:flex;}
+      .mobile-nav a{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--hairline);transition:color .14s;}
+      .mobile-nav a:last-child{border-bottom:none;}
+      .mobile-nav a:hover{color:var(--ink);}
+    }
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+    .page{max-width:760px;margin:0 auto;padding:0 24px 0;}
+
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .rd1{transition-delay:.07s;}.rd2{transition-delay:.16s;}.rd3{transition-delay:.25s;}.rd4{transition-delay:.34s;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleX{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
+
+    /* Hero */
+    .hero{padding:80px 0 64px;}
+    .hero-dateline{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);padding-bottom:12px;border-bottom:1px solid var(--hairline);display:flex;justify-content:space-between;opacity:0;animation:fadeUp .5s .05s ease forwards;}
+    .hero-rule{height:5px;background:var(--ink);margin:14px 0 20px;opacity:0;animation:scaleX .5s .15s ease forwards;transform-origin:left;}
+    .hero-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;opacity:0;animation:fadeUp .5s .2s ease forwards;}
+    .headline{font-weight:900;letter-spacing:-.06em;line-height:.97;font-size:clamp(36px,6vw,72px);margin-bottom:0;opacity:0;animation:fadeUp .6s .25s ease forwards;}
+    .hero-sub{font-size:clamp(15px,1.8vw,17px);color:var(--muted);line-height:1.6;letter-spacing:-.01em;margin-top:24px;max-width:560px;opacity:0;animation:fadeUp .6s .45s ease forwards;}
+
+    /* Sections */
+    .section{padding-top:72px;margin-top:72px;border-top:1.5px solid var(--ink);}
+    .section-light{padding-top:56px;margin-top:56px;border-top:1px solid var(--hairline);}
+    .eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+    .h2{font-weight:900;letter-spacing:-.055em;font-size:clamp(22px,3vw,34px);line-height:1.05;margin-bottom:16px;}
+    .h3{font-weight:900;letter-spacing:-.04em;font-size:clamp(17px,2vw,22px);line-height:1.15;margin-bottom:10px;}
+    .section-sub{font-size:14px;color:var(--muted);line-height:1.6;max-width:560px;margin-bottom:36px;}
+    .body-text{font-size:15px;color:var(--ink);line-height:1.65;letter-spacing:-.01em;margin-bottom:20px;}
+    .body-muted{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+
+    /* Gap columns */
+    .gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:32px 0;}
+    @media(max-width:600px){.gap-grid{grid-template-columns:1fr;gap:24px;}}
+    .gap-col-label{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+
+    /* Stats */
+    .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+    @media(max-width:600px){.stat-grid{grid-template-columns:repeat(3,1fr);gap:12px;}}
+    .stat{border:1px solid var(--hairline);padding:20px;text-align:center;}
+    .stat-num{font-weight:900;letter-spacing:-.06em;font-size:28px;line-height:1;}
+    .stat-label{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:6px;}
+
+    /* Review cards */
+    .review-card{background:#faf9f7;border:1px solid var(--hairline);padding:24px;position:relative;}
+    .review-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--warm);}
+    .review-stars{color:var(--warm);font-size:14px;letter-spacing:2px;margin-bottom:10px;}
+    .review-text{font-size:14px;line-height:1.6;font-style:italic;color:var(--ink);margin-bottom:12px;}
+    .review-meta{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+
+    /* IG feed list */
+    .ig-feed-list{margin-top:16px;display:grid;gap:0;}
+    .ig-feed-item{border-bottom:1px solid var(--hairline);padding:12px 0;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;}
+    .ig-feed-item:last-child{border-bottom:none;}
+    .ig-feed-caption{font-size:12px;color:var(--muted);line-height:1.5;}
+    .ig-feed-stats{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);white-space:nowrap;text-align:right;}
+    .ig-feed-stats strong{color:var(--warm);font-weight:700;}
+
+    /* Anchor visual */
+    .anchor-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;}
+    .anchor-bullet{width:6px;height:6px;background:var(--warm);border-radius:50%;flex-shrink:0;margin-top:7px;}
+    .anchor-text{font-size:14px;line-height:1.55;}
+    .anchor-bold{font-weight:700;}
+
+    /* Callout */
+    .callout{background:rgba(10,10,10,.03);border:1px solid var(--hairline);padding:28px 24px;margin:32px 0;}
+    .callout-label{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+    .callout-text{font-size:15px;font-weight:700;letter-spacing:-.02em;line-height:1.45;}
+
+    /* Format cards */
+    .format-card{border:1.5px solid var(--ink);padding:28px 24px;margin-bottom:20px;}
+    .format-num{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+    .format-title{font-weight:900;letter-spacing:-.04em;font-size:20px;margin-bottom:10px;}
+    .format-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+    .format-detail{font-size:13px;line-height:1.6;}
+    .format-detail strong{font-weight:700;}
+
+    /* Content concepts */
+    .concept{border-bottom:1px solid var(--hairline);padding:20px 0;}
+    .concept:last-child{border-bottom:none;}
+    .concept-num{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+    .concept-title{font-weight:800;letter-spacing:-.03em;font-size:16px;margin:4px 0 6px;}
+    .concept-desc{font-size:13px;color:var(--muted);line-height:1.55;}
+    .concept-tag{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--warm);background:var(--warm-bg);padding:3px 8px;border-radius:2px;margin-top:8px;}
+
+    /* Week headers */
+    .week-header{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-top:36px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--hairline);}
+
+    /* Dark section */
+    .dark-section{background:var(--ink);color:#fff;margin:72px -24px 0;padding:72px 24px 80px;}
+    .dark-section .page-inner{max-width:760px;margin:0 auto;}
+    .dark-section .eyebrow{color:rgba(255,255,255,.30);}
+    .dark-section .h2{color:#fff;}
+    .dark-section .section-sub{color:rgba(255,255,255,.50);}
+    .dark-section .body-text{color:rgba(255,255,255,.75);}
+    .dark-section .anchor-bullet{background:var(--warm);}
+    .dark-section .anchor-text{color:rgba(255,255,255,.75);}
+    .dark-section .anchor-bold{color:#fff;}
+    .dark-section .callout{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);}
+    .dark-section .callout-label{color:rgba(255,255,255,.30);}
+    .dark-section .callout-text{color:#fff;}
+
+    /* Anchor headline */
+    .anchor-hero{text-align:center;margin-bottom:48px;}
+    .anchor-hero-name{font-weight:900;letter-spacing:-.06em;font-size:clamp(40px,6vw,72px);line-height:.95;margin-bottom:16px;}
+    .anchor-hero-name em{font-style:italic;color:var(--warm);}
+    .anchor-hero-sub{font-size:clamp(14px,1.6vw,16px);color:rgba(255,255,255,.45);max-width:480px;margin:0 auto;line-height:1.55;}
+
+    /* Mid-page CTA band */
+    .mid-cta{background:var(--ink);color:#fff;margin:0 -24px;padding:48px 24px;text-align:center;}
+    .mid-cta .page-inner{max-width:760px;margin:0 auto;}
+    .mid-cta .mid-cta-headline{font-weight:900;letter-spacing:-.05em;font-size:clamp(20px,3vw,28px);line-height:1.1;margin-bottom:10px;}
+    .mid-cta .mid-cta-sub{font-size:14px;color:rgba(255,255,255,.50);margin-bottom:24px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.5;}
+    .mid-cta .btn.warm{font-size:14px;padding:12px 28px;}
+
+    /* Compounding visual */
+    .compound-flow{display:grid;gap:0;border:1px solid var(--hairline);border-bottom:none;margin:32px 0;}
+    .compound-step{border-bottom:1px solid var(--hairline);padding:20px 22px;display:grid;grid-template-columns:32px 1fr;gap:16px;align-items:start;}
+    .compound-num{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding-top:3px;}
+    .compound-content b{font-weight:900;letter-spacing:-.04em;font-size:14px;display:block;margin-bottom:4px;}
+    .compound-content span{font-size:13px;color:var(--muted);line-height:1.55;}
+    .compound-arrow{text-align:center;padding:6px;font-size:10px;color:var(--dim);border-bottom:1px solid var(--hairline);}
+
+    /* Pricing card */
+    .pricing-card{border:1.5px solid var(--ink);padding:32px 28px;margin:32px 0;}
+    .pricing-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+    .pricing-amount{font-weight:900;letter-spacing:-.06em;font-size:clamp(32px,4vw,48px);line-height:1;margin-bottom:4px;}
+    .pricing-term{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+    .pricing-includes{display:grid;gap:8px;padding-top:16px;border-top:1px solid var(--hairline);}
+    .pricing-item{font-size:13px;color:var(--muted);padding-left:16px;position:relative;line-height:1.5;}
+    .pricing-item::before{content:"+";position:absolute;left:0;font-weight:900;color:var(--ink);font-size:12px;}
+    .pricing-note{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:16px;padding-top:12px;border-top:1px solid var(--hairline);line-height:1.8;}
+
+    /* CTA section */
+    .cta-section{background:var(--ink);color:#fff;margin:72px -24px 0;padding:72px 24px 80px;}
+    .cta-inner{max-width:760px;margin:0 auto;}
+    .cta-section .eyebrow{color:rgba(255,255,255,.35);}
+    .cta-section .h2{color:#fff;margin-bottom:12px;}
+    .cta-section .body-muted{color:rgba(255,255,255,.55);}
+    .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;margin-top:36px;}
+    @media(max-width:600px){.cta-grid{grid-template-columns:1fr;gap:32px;}}
+    .cta-left-text{font-size:14px;color:rgba(255,255,255,.55);line-height:1.65;margin-bottom:16px;}
+    .cta-left-text strong{color:#fff;font-weight:700;}
+    .cta-contact{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);display:grid;gap:8px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.10);}
+    .cta-contact a{color:rgba(255,255,255,.70);text-decoration:underline;text-underline-offset:3px;transition:color .15s;}
+    .cta-contact a:hover{color:#fff;}
+
+    /* CTA form */
+    .cta-form-card{border:1px solid rgba(255,255,255,.15);padding:28px;background:rgba(255,255,255,.04);}
+    .cta-form-label{font-family:var(--mono);font-size:9px;letter-spacing:.20em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.10);}
+    .cta-form{display:grid;gap:10px;}
+    .cta-form input,.cta-form textarea{padding:10px 12px;border-radius:2px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:16px;letter-spacing:-.01em;width:100%;transition:border-color .18s;-webkit-appearance:none;}
+    @media(min-width:541px){.cta-form input,.cta-form textarea{font-size:13px;}}
+    .cta-form input:focus,.cta-form textarea:focus{outline:none;border-color:rgba(255,255,255,.45);}
+    .cta-form input::placeholder,.cta-form textarea::placeholder{color:rgba(255,255,255,.30);}
+    .cta-form textarea{resize:vertical;min-height:80px;}
+    .cta-form .btn.warm{margin-top:4px;}
+    .cta-form-note{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:8px;}
+    .cta-form-success{display:none;padding:32px 0;text-align:center;}
+    .cta-form-success b{font-weight:900;letter-spacing:-.05em;font-size:18px;display:block;margin-bottom:6px;color:#fff;}
+    .cta-form-success span{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.50);line-height:2;}
+
+    /* Sticky CTA */
+    .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:400;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-top:1.5px solid var(--ink);padding:12px 24px;transform:translateY(100%);transition:transform .3s ease;}
+    .sticky-cta.visible{transform:translateY(0);}
+    .sticky-cta-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .sticky-cta-text{font-weight:900;letter-spacing:-.04em;font-size:14px;}
+    .sticky-cta-text span{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400;display:block;margin-top:2px;}
+    @media(max-width:600px){.sticky-cta-text span{display:none;}}
+
+    /* Nav TOC */
+    .toc{margin:32px 0;padding:20px 0;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
+    .toc-item{display:block;padding:8px 0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .15s;}
+    .toc-item:hover{color:var(--ink);}
+    .toc-item span{color:var(--dim);margin-right:8px;}
+
+    /* Footer */
+    .footer{padding:20px 24px;text-align:center;border-top:1.5px solid var(--ink);}
+    .footer-inner{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);flex-wrap:wrap;}
+    .footer-inner a{transition:color .14s;}
+    .footer-inner a:hover{color:var(--ink);}
+
+    @media(pointer:coarse){
+      body{cursor:auto;}
+      #cursor,#cursor-ring{display:none !important;}
+      .btn{cursor:pointer;min-height:44px;}
+      .menu-btn{cursor:pointer;min-height:44px;min-width:44px;align-items:center;justify-content:center;}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .grain{animation:none !important;}
+      .reveal{opacity:1 !important;transform:none !important;}
+      .hero-dateline,.hero-rule,.hero-kicker,.headline,.hero-sub,.toc{opacity:1 !important;animation:none !important;transform:none !important;}
+      .sticky-cta{transition:none !important;}
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Topbar -->
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand"><b>[SCC]</b> <span>Studio</span></a>
+      <nav class="nav">
+        <a href="hospitality.html">Hospitality</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+      </nav>
+      <a class="btn primary" href="#next">Let's talk</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="hospitality.html">Hospitality</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="#next">Let's talk</a>
+    </nav>
+  </nav>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <header class="hero" id="top">
+      <div class="hero-dateline">
+        <span>Prepared for Open Outcry Brewing Company</span>
+        <span>March 2026</span>
+      </div>
+      <div class="hero-rule"></div>
+      <p class="hero-kicker">Cultural Positioning Strategy</p>
+      <h1 class="headline">The floor closed.<br/>The brewery kept it alive.</h1>
+      <p class="hero-sub">Open Outcry has 294 reviews, nine years in Beverly, and the most singular origin story in Chicago craft beer. The name, the beers, the owner — they all trace back to the same trading floor. None of it lives online.</p>
+
+      <nav class="toc" style="opacity:0;animation:fadeUp .5s .6s ease forwards;">
+        <a class="toc-item" href="#gap"><span>01</span> The Gap</a>
+        <a class="toc-item" href="#story"><span>02</span> The Story Inside</a>
+        <a class="toc-item" href="#anchor"><span>03</span> The Floor</a>
+        <a class="toc-item" href="#system"><span>04</span> The System</a>
+        <a class="toc-item" href="#next"><span>05</span> The Engagement</a>
+      </nav>
+    </header>
+
+    <!-- 01: THE GAP -->
+    <section class="section reveal" id="gap">
+      <p class="eyebrow">01 — The Gap</p>
+      <h2 class="h2">What people say vs. what the feed shows.</h2>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-num">294</div>
+          <div class="stat-label">Yelp Reviews</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">9yr</div>
+          <div class="stat-label">In Beverly</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Avg Likes / Post</div>
+        </div>
+      </div>
+
+      <div class="gap-grid">
+        <div>
+          <p class="gap-col-label">What People Say After Leaving</p>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"All the times I have been in there the owner has been there walking around talking to the customers."</p>
+            <p class="review-meta">Yelp Review</p>
+          </div>
+          <div class="review-card" style="margin-top:16px;">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"A cozy community hub where you can sit back, unwind, enjoy some great food and take refuge in the quaint rooftop beer garden."</p>
+            <p class="review-meta">South Side Weekly — Best Place to Unwind, 2024</p>
+          </div>
+          <p class="body-muted" style="margin-top:16px;">The same words across 294 reviews: <strong>neighborhood, community, unwind, hub, refuge, owner is always there.</strong> Warm — but generic. Every neighborhood bar gets called that.</p>
+        </div>
+        <div>
+          <p class="gap-col-label">What the Instagram Shows — @openoutcrybrewing</p>
+          <div class="ig-feed-list">
+            <div class="ig-feed-item">
+              <div class="ig-feed-caption">Soup of the day: chicken tortilla soup...</div>
+              <div class="ig-feed-stats">3 likes · 0 comments</div>
+            </div>
+            <div class="ig-feed-item">
+              <div class="ig-feed-caption">Wednesday wrap special: buffalo chicken...</div>
+              <div class="ig-feed-stats">4 likes · 0 comments</div>
+            </div>
+            <div class="ig-feed-item">
+              <div class="ig-feed-caption">Happy St. Patrick's Day! Irish coffee specials...</div>
+              <div class="ig-feed-stats">2 likes · 0 comments</div>
+            </div>
+            <div class="ig-feed-item">
+              <div class="ig-feed-caption">Sorry for the late post folks! Taking care of Jim post surgery is a full time job!</div>
+              <div class="ig-feed-stats"><strong>5 likes · 11 comments</strong></div>
+            </div>
+            <div class="ig-feed-item">
+              <div class="ig-feed-caption">Tuesday trivia with @wgonzales13...</div>
+              <div class="ig-feed-stats">2 likes · 0 comments</div>
+            </div>
+            <div class="ig-feed-item">
+              <div class="ig-feed-caption">Pizza special: sausage and pepper...</div>
+              <div class="ig-feed-stats">1 like · 0 comments</div>
+            </div>
+          </div>
+          <p class="body-muted" style="margin-top:12px;font-size:12px;">Daily food specials. Event flyers. Same overhead photo, every day. The one time something personal broke through — Jim's surgery post — 11 comments. Everything else: zero. The community wants to hear from the humans. They're just not getting the chance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02: THE STORY INSIDE -->
+    <section class="section reveal" id="story">
+      <p class="eyebrow">02 — The Story Inside</p>
+      <h2 class="h2">What the internet can't find about Open Outcry.</h2>
+
+      <p class="body-text"><strong>The name.</strong> "Open outcry" is the trading method pit traders used on the Chicago Board of Trade floor — shouting, hand signals, organized chaos. Before electronic trading killed it in 2015, every trade in Chicago happened like this. The brewery is named after a dead art form of American financial history.</p>
+
+      <p class="body-text"><strong>The owner.</strong> Jim Beck worked that floor. He's from Beverly — St. Barnabas Parish, grew up on these blocks. He didn't just buy a brewery with an interesting name. He bought a brewery named after the thing he used to do, in the neighborhood where he grew up. Katie Beck runs the day-to-day — she's been creating food content since 2014 with her blog "Kate the Baker." She already knows how to make things look good. The format is the only thing missing.</p>
+
+      <p class="body-text"><strong>The beers.</strong> Every single one is named after a financial term. <strong>Black Scholes</strong> — the options pricing model. <strong>Dark Pool</strong> — off-exchange trading. <strong>Bang the Close</strong> — dumping orders at 3:59 PM. <strong>Speculator. Dodd-Frank. The Accountant. Big Board. Open Interest.</strong> Each beer is a story. Nobody is telling them.</p>
+
+      <p class="body-text"><strong>The brewmaster.</strong> Wil Turner — 25 years of experience. Head pub brewer at Revolution Brewing for 7 years. Goose Island Beer Co. before that. He was a customer at Open Outcry before he was the brewmaster. He chose this place. Almost nobody outside Beverly knows he's here.</p>
+
+      <p class="body-text"><strong>The rooftop.</strong> Beer garden with deck chairs, couches, live music building. Igloos in the winter. The best visual asset in the building — essentially zero documentation online.</p>
+
+      <div class="callout">
+        <p class="callout-label">The Point</p>
+        <p class="callout-text">The most interesting origin story in Chicago craft beer — a trading floor that became a brewery, beer names that read like a financial textbook, an owner who lived the story — doesn't exist anywhere online. That's the gap.</p>
+      </div>
+    </section>
+
+  </div><!-- /.page -->
+
+  <!-- 03: THE POSITIONING ANCHOR — "The Floor" -->
+  <section class="dark-section reveal" id="anchor">
+    <div class="page-inner">
+      <p class="eyebrow">03 — The Positioning Anchor</p>
+
+      <div class="anchor-hero">
+        <h2 class="anchor-hero-name"><em>The Floor.</em></h2>
+        <p class="anchor-hero-sub">Not a tagline. The single idea that everything builds on. The name, the beers, the owner, the content, the brand — all of it runs through the floor.</p>
+      </div>
+
+      <p style="font-size:15px;color:rgba(255,255,255,.70);line-height:1.65;margin-bottom:32px;">The CBOT trading floor is gone. Open Outcry kept the language alive. The anchor isn't a marketing concept — it's Jim's biography. It's already in the name, the beer names, and the building. It just needs to be turned on.</p>
+
+      <div style="margin-top:16px;">
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The name</span> — "open outcry" is the actual trading method used on the CBOT floor. Shouting, hand signals, organized chaos. The pits closed in 2015. The brewery opened a year later.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The owner</span> — Jim Beck worked that floor. This isn't his marketing story. It's his life story.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The beer names</span> — Black Scholes. Dark Pool. Bang the Close. Speculator. Dodd-Frank. Every beer on the menu is a chapter from the same world.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The brewmaster</span> — Wil Turner. 25 years. Revolution. Goose Island. He was a customer here before he was the brewmaster. Now he makes the beer that carries the names.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The rooftop</span> — Beverly's best-kept secret. Deck chairs, couches, igloos, live music. Undocumented online. The opening bell rings here every spring.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The neighborhood</span> — Beverly. South Side Irish Parade route. Ridge Historic District. Jim grew up here. The floor and the neighborhood share the same energy — loud, communal, everyone knows everyone.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The proof</span> — Jim's surgery post got 11 comments. Everything else gets zero. The community showed up the one time the content felt human. They want to hear from Jim. They just need the format.</div></div>
+        <div class="anchor-item"><div class="anchor-bullet"></div><div class="anchor-text"><span class="anchor-bold">The claim</span> — zero other breweries in America can say this. The name, the beer names, and the owner's biography all trace back to the same building. That is permanently, defensibly, yours.</div></div>
+      </div>
+
+      <div class="callout" style="margin-top:36px;">
+        <p class="callout-label">How the Anchor Works</p>
+        <p class="callout-text">Every piece of content passes through one filter: does this come from the floor? New beer launch? It's an IPO. Last call? It's the closing bell. Rooftop opens for summer? Opening bell. Weekly recap? The market report. The trading floor isn't a gimmick — it's the operating system for the entire brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-page CTA -->
+  <div class="mid-cta reveal">
+    <div class="page-inner">
+      <p class="mid-cta-headline">Interested? Let's talk.</p>
+      <p class="mid-cta-sub">The anchor above is the diagnosis. Below is how the whole world gets built — or we can just have a conversation.</p>
+      <a class="btn warm" href="#next">Start a conversation</a>
+    </div>
+  </div>
+
+  <!-- 04: THE SYSTEM -->
+  <div class="page">
+    <section class="section reveal" id="system">
+      <p class="eyebrow">04 — The System</p>
+      <h2 class="h2">The trading floor runs everything.</h2>
+      <p class="section-sub">No random content. Every format, every post, every video runs through The Floor. The brewery becomes a trading floor that serves beer — and the content is the broadcast.</p>
+
+      <!-- The World -->
+      <div class="callout" style="margin-top:0;margin-bottom:36px;">
+        <p class="callout-label">The World</p>
+        <p class="callout-text" style="margin-bottom:12px;">The trading floor didn't die. It moved to 10934 S. Western Ave.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:12px;">
+          New beer drops are <strong style="color:var(--ink);">IPOs</strong>.
+          Last call is the <strong style="color:var(--ink);">Closing Bell</strong>.
+          The menu is the <strong style="color:var(--ink);">Board</strong>.
+          The weekly recap is the <strong style="color:var(--ink);">Market Report</strong>.
+          Seasonal rotations are <strong style="color:var(--ink);">bull and bear markets</strong>.
+          The rooftop opening is the <strong style="color:var(--ink);">Opening Bell</strong>.
+          Trivia night is the <strong style="color:var(--ink);">Trading Desk</strong>.
+          Regulars are <strong style="color:var(--ink);">shareholders</strong>.
+        </p>
+      </div>
+
+      <!-- Compounding visual -->
+      <div class="compound-flow">
+        <div class="compound-step">
+          <div class="compound-num">01</div>
+          <div class="compound-content">
+            <b>The Positioning Anchor</b>
+            <span>The Floor — the foundation. Every decision flows from the same trading floor that gave this brewery its name.</span>
+          </div>
+        </div>
+        <div class="compound-arrow">↓</div>
+        <div class="compound-step">
+          <div class="compound-num">02</div>
+          <div class="compound-content">
+            <b>Three Content Lanes</b>
+            <span><strong>The Report</strong> (recurring market updates — the engine) · <strong>The Names</strong> (beer name explainers — the library) · <strong>The Room</strong> (Beverly community through the trading floor lens). All three run through the floor.</span>
+          </div>
+        </div>
+        <div class="compound-arrow">↓</div>
+        <div class="compound-step">
+          <div class="compound-num">03</div>
+          <div class="compound-content">
+            <b>Repeatable Formats</b>
+            <span>Two core formats — The Market Report (Jim at the bar, weekly, 30 seconds) and "What's a [Beer Name]?" (Jim holds the pint, explains the term). Repeatable. Producible. Compounding.</span>
+          </div>
+        </div>
+        <div class="compound-arrow">↓</div>
+        <div class="compound-step">
+          <div class="compound-num">04</div>
+          <div class="compound-content">
+            <b>Compounding Effect</b>
+            <span>Week 1 someone learns what "open outcry" means. Week 2 they hear about Black Scholes. Week 3 they see the rooftop. By week 4, they're not just following — they're driving to Beverly. Every post reinforces the last.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:32px;margin-bottom:48px;">
+        <p class="callout-label">The Rule</p>
+        <p class="callout-text">Floor → Craft → Pour. Every video opens with something from the trading world — the name, the concept, the bit. The middle is the craft — how the beer is made, what goes into it. The resolve is always the pour. Same structure. Infinite variations.</p>
+      </div>
+
+      <!-- Two format cards -->
+      <div class="format-card">
+        <p class="format-num">Format 01 — The Market Report</p>
+        <p class="format-title">Jim at the bar. 30 seconds. Weekly.</p>
+        <p class="format-desc">"Markets closed down 2% today. Black Scholes is on nitro. Dark Pool just came back from the barrel. The Speculator is moving." Quick cuts. Beer pours as the ticker. Jim plays the anchor — because he already was one.</p>
+        <p class="format-detail"><strong>Why it works here:</strong> Jim worked the actual floor. He's not cosplaying a trader — he was one. The authority is real. <strong>Cadence:</strong> 1x/week.</p>
+      </div>
+
+      <div class="format-card">
+        <p class="format-num">Format 02 — "What's a [Beer Name]?"</p>
+        <p class="format-title">Jim holds the pint. Explains the term. Connects it to the beer.</p>
+        <p class="format-desc">"This is called Black Scholes. In 1973, Fischer Black and Myron Scholes figured out how to price risk mathematically. You know what you can't price? How good this stout is." Sip.</p>
+        <p class="format-detail"><strong>Why it works here:</strong> 10+ beers on the menu = 10+ videos built in before you even think about what's next. Every beer is a story. <strong>Cadence:</strong> 1-2x/week.</p>
+      </div>
+
+      <!-- 16 concepts -->
+      <div class="section-light">
+        <h3 class="h3">16 specific content concepts.</h3>
+        <p class="body-muted" style="margin-bottom:8px;">Each one is shootable. Each one runs through The Floor.</p>
+
+        <div id="concepts-wrapper" style="max-height:0;overflow:hidden;transition:max-height .5s ease;">
+          <p class="week-header">The Report — Recurring Engine</p>
+          <div class="concept">
+            <p class="concept-num">01</p>
+            <p class="concept-title">"The Market Report"</p>
+            <p class="concept-desc">Jim at the bar. Weekly. "Markets closed red today. Black Scholes is on nitro. Dark Pool just came back. The Speculator is moving." Beer pours as the ticker. Quick cuts. 30 seconds.</p>
+            <span class="concept-tag">The Report → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">02</p>
+            <p class="concept-title">"Closing Bell"</p>
+            <p class="concept-desc">Last call content. Quick recap of the night. "The bell just rang. Here's what moved today." The taproom winding down. Glasses being cleared. Lights coming up.</p>
+            <span class="concept-tag">The Report → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">03</p>
+            <p class="concept-title">"IPO" — New Beer Launch</p>
+            <p class="concept-desc">"We're taking this one public." Wil Turner reveals the new beer. Jim explains the name. First pour. First customer reaction. The launch is a market event.</p>
+            <span class="concept-tag">The Report → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">04</p>
+            <p class="concept-title">"Opening Bell" — Rooftop Opens for Summer</p>
+            <p class="concept-desc">Ring an actual bell. The rooftop is open. Deck chairs. First pour of the season. "The market is open." Beverly's best-kept secret goes live.</p>
+            <span class="concept-tag">The Report → Floor</span>
+          </div>
+
+          <p class="week-header">The Names — Evergreen Library</p>
+          <div class="concept">
+            <p class="concept-num">05</p>
+            <p class="concept-title">"What's a Black Scholes?"</p>
+            <p class="concept-desc">Jim holds the nitro stout. "Fischer Black and Myron Scholes figured out how to price risk in 1973. You know what you can't price?" Sip. "How good this is."</p>
+            <span class="concept-tag">The Names → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">06</p>
+            <p class="concept-title">"What's a Dark Pool?"</p>
+            <p class="concept-desc">Barrel-aged pour. "In finance, a dark pool is a private exchange where large trades happen and nobody sees it." Cut to the aging barrel. "Out of sight. Until it's ready."</p>
+            <span class="concept-tag">The Names → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">07</p>
+            <p class="concept-title">"What's Bang the Close?"</p>
+            <p class="concept-desc">Pale ale pour. "Traders say it when someone dumps a massive order at 3:59 PM. Creates chaos. Moves the market. This pale ale? Same energy."</p>
+            <span class="concept-tag">The Names → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">08</p>
+            <p class="concept-title">"What Is Open Outcry?"</p>
+            <p class="concept-desc">Jim to camera. "Before electronic trading, every trade on the Chicago Board of Trade happened like this." Archival pit footage. "I worked that floor. And I named this brewery after it."</p>
+            <span class="concept-tag">The Names → Floor</span>
+          </div>
+
+          <p class="week-header">The Room — Beverly Through the Floor</p>
+          <div class="concept">
+            <p class="concept-num">09</p>
+            <p class="concept-title">"The Trading Desk" — Trivia Night</p>
+            <p class="concept-desc">Quick cuts of teams arguing. Someone shouts an answer. Wrong. "NOOOO." The host laughs. A winner is declared. The trading desk is open every Tuesday.</p>
+            <span class="concept-tag">The Room → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">10</p>
+            <p class="concept-title">"The Shareholders"</p>
+            <p class="concept-desc">The regulars. The people who come every week. Quick portraits — who they are, what they drink, how long they've been coming. "These are our shareholders."</p>
+            <span class="concept-tag">The Room → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">11</p>
+            <p class="concept-title">"Jim Is Back"</p>
+            <p class="concept-desc">Jim's return to the taproom after surgery. Walking in. Someone at the bar sees him. The regulars. The handshakes. The moment the room notices. No script needed.</p>
+            <span class="concept-tag">The Room → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">12</p>
+            <p class="concept-title">South Side Irish Parade Day</p>
+            <p class="concept-desc">The parade goes right past the door. Crowds. Green. The taproom packed. Jim standing out front. "50,000 people walk past the floor once a year."</p>
+            <span class="concept-tag">The Room → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">13</p>
+            <p class="concept-title">Brew Day — No Talking</p>
+            <p class="concept-desc">Grain pouring. Mash water. Steam. Wil Turner's hands. The hot side. Fermentation. The nitro pour to close. 20-30 seconds. Just process sounds.</p>
+            <span class="concept-tag">The Room → Craft</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">14</p>
+            <p class="concept-title">The Nitro Pour — Black Scholes</p>
+            <p class="concept-desc">Close-up of the nitro tap. The cascade. The dark waves. The head settling. 8 seconds. No talking. Just the sound. The most visually stunning pour in the building.</p>
+            <span class="concept-tag">The Room → Craft</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">15</p>
+            <p class="concept-title">"The Day They Closed the Pits"</p>
+            <p class="concept-desc">"On July 6, 2015, the Chicago Board of Trade closed its options pits for the last time. I was there." B-roll of the CBOT building. "Open outcry died on a Tuesday. This brewery opened a year and a half later."</p>
+            <span class="concept-tag">The Names → Floor</span>
+          </div>
+          <div class="concept">
+            <p class="concept-num">16</p>
+            <p class="concept-title">"Beverly Has One Brewery"</p>
+            <p class="concept-desc">Text on the exterior. "Beverly. Morgan Park. Mount Greenwood. One brewery. This one." Cut inside to the packed taproom on a Friday night. The floor is open.</p>
+            <span class="concept-tag">The Room → Floor</span>
+          </div>
+        </div>
+
+        <button id="concepts-toggle" onclick="var w=document.getElementById('concepts-wrapper');var b=this;if(w.style.maxHeight==='0px'){w.style.maxHeight=w.scrollHeight+'px';b.textContent='Collapse';}else{w.style.maxHeight='0px';b.textContent='See all 16 concepts';}" style="margin-top:16px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:none;border:1.5px solid var(--ink);padding:10px 24px;cursor:pointer;transition:background .15s,color .15s;">See all 16 concepts</button>
+      </div>
+
+      <!-- Engagement path -->
+      <div class="section-light">
+        <p class="eyebrow">How We Work</p>
+        <h3 class="h3">Every engagement starts with the audit.</h3>
+        <p class="body-muted">We don't jump to retainers. We diagnose first, then scope the build together if there's a fit.</p>
+
+        <div class="compound-flow">
+          <div class="compound-step">
+            <div class="compound-num">01</div>
+            <div class="compound-content">
+              <b>Venue Identity Audit</b>
+              <span>The starting point. A deep read on the gap between who you are in the room and what your digital presence says. Delivered as a custom strategy brief — like this page, but with the full system spec.</span>
+            </div>
+          </div>
+          <div class="compound-arrow">↓ if there's a fit</div>
+          <div class="compound-step">
+            <div class="compound-num">02</div>
+            <div class="compound-content">
+              <b>Audit + Blueprint</b>
+              <span>The audit plus a full positioning anchor, format system design, content direction, and production-ready shot lists. Everything your team needs to execute — or for us to execute together.</span>
+            </div>
+          </div>
+          <div class="compound-arrow">↓ if you want ongoing partnership</div>
+          <div class="compound-step">
+            <div class="compound-num">03</div>
+            <div class="compound-content">
+              <b>Monthly Retainer</b>
+              <span>Strategy, creative direction, production oversight, and ongoing iteration. We run the system, review performance, and keep compounding on the anchor month over month.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:24px;">
+          <p class="callout-label">No pressure</p>
+          <p class="callout-text">Each tier stands on its own. The audit alone gives you a strategy you can run with. The blueprint gives you the full system. The retainer means we run it together. You decide how far to go at each step.</p>
+        </div>
+      </div>
+    </section>
+  </div><!-- /.page -->
+
+  <!-- 05: NEXT STEPS -->
+  <section class="cta-section reveal" id="next">
+    <div class="cta-inner">
+      <p class="eyebrow">05 — Next Steps</p>
+      <h2 class="h2" style="font-size:clamp(22px,3vw,30px);">Nine years of reputation. None of it online.</h2>
+      <p class="body-muted" style="max-width:560px;margin-bottom:0;">This page is the diagnosis. If it resonates, the next step is a conversation — we'll walk through the strategy, answer questions, and figure out if there's a fit. No commitment.</p>
+
+      <div class="cta-grid">
+        <div>
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;">What happens next</p>
+          <p class="cta-left-text"><strong>We have a conversation.</strong> Walk through The Floor, the system, and what the engagement could look like. You ask whatever you want to ask.</p>
+          <p class="cta-left-text"><strong>If there's a fit, we start with the audit.</strong> A deep-dive strategy brief scoped to Open Outcry. From there, you decide how far to go — audit only, audit + blueprint, or ongoing partnership.</p>
+          <p class="cta-left-text">I'm Alex Urbach. I run SCC — Social Chicago Collective. I built this strategy because the story is too good to not be told online.</p>
+
+          <div class="cta-contact">
+            <span>Or reach out directly:</span>
+            <span>Alex Urbach · <a href="mailto:alex@socialchicagocollective.com">alex@socialchicagocollective.com</a></span>
+          </div>
+        </div>
+        <div>
+          <div class="cta-form-card">
+            <div class="cta-form-label">Start the conversation</div>
+            <form class="cta-form" id="outcryForm" name="opencry-inquiry" data-netlify="true">
+              <input type="hidden" name="form-name" value="opencry-inquiry" />
+              <input type="hidden" name="prospect" value="Open Outcry Brewing Company" />
+              <label for="o-name" class="sr-only">Name</label>
+              <input id="o-name" name="name" placeholder="Your name" autocomplete="name" required />
+              <label for="o-email" class="sr-only">Email</label>
+              <input id="o-email" name="email" type="email" placeholder="Email" autocomplete="email" required />
+              <label for="o-message" class="sr-only">Message</label>
+              <textarea id="o-message" name="message" placeholder="Anything you'd like us to know (optional)"></textarea>
+              <button type="submit" class="btn warm block">Send — let's talk</button>
+            </form>
+            <div class="cta-form-success" id="outcryFormSuccess">
+              <b>Got it.</b>
+              <span>We'll be in touch within 24 hours to set up a time.</span>
+            </div>
+            <p class="cta-form-note">No commitment. We respond within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span><a href="index.html">[SCC]</a> · Social Chicago Collective</span>
+      <span><a href="mailto:alex@socialchicagocollective.com">alex@socialchicagocollective.com</a></span>
+      <span>Chicago, IL · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></span>
+    </div>
+  </footer>
+
+  <!-- Sticky CTA bar -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-inner">
+      <div class="sticky-cta-text">
+        Open Outcry — Positioning Strategy
+        <span>Prepared by SCC · March 2026</span>
+      </div>
+      <a class="btn primary" href="#next" style="flex-shrink:0;">Let's talk</a>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    // Cursor
+    var dot=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+    if(dot&&ring&&window.matchMedia('(pointer:fine)').matches){
+      var mx=0,my=0,dx=0,dy=0,rx=0,ry=0;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;document.body.classList.add('cursor-on');});
+      (function loop(){dx+=(mx-dx)*.35;dy+=(my-dy)*.35;rx+=(mx-rx)*.15;ry+=(my-ry)*.15;dot.style.left=dx+'px';dot.style.top=dy+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+      document.querySelectorAll('a,button,[role="button"]').forEach(function(el){
+        el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});
+        el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});
+      });
+    }
+
+    // Reveal on scroll
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+    // Mobile menu
+    var mb=document.getElementById('menuBtn'),mn=document.getElementById('mobileNav');
+    if(mb&&mn){mb.addEventListener('click',function(){mb.classList.toggle('open');mn.classList.toggle('open');});}
+
+    // Sticky CTA
+    var sticky=document.getElementById('stickyCta');
+    var heroEl=document.getElementById('top');
+    var ctaEl=document.getElementById('next');
+    if(sticky&&heroEl){
+      function checkSticky(){
+        var heroBottom=heroEl.getBoundingClientRect().bottom;
+        var ctaTop=ctaEl?ctaEl.getBoundingClientRect().top:99999;
+        var show=heroBottom<-100&&ctaTop>window.innerHeight+100;
+        sticky.classList.toggle('visible',show);
+      }
+      window.addEventListener('scroll',checkSticky,{passive:true});
+      checkSticky();
+    }
+
+    // Form submission
+    var form=document.getElementById('outcryForm'),success=document.getElementById('outcryFormSuccess');
+    if(form){
+      form.addEventListener('submit',async function(e){
+        e.preventDefault();
+        var btn=form.querySelector('button[type="submit"]');
+        btn.textContent='Sending...';btn.disabled=true;
+        try{
+          var r=await fetch('/',{method:'POST',body:new URLSearchParams(new FormData(form)).toString(),headers:{'Content-Type':'application/x-www-form-urlencoded'}});
+          if(r.ok){form.style.display='none';success.style.display='block';}
+          else{btn.textContent='Error — try again';btn.disabled=false;}
+        }catch(err){btn.textContent='Error — try again';btn.disabled=false;}
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
